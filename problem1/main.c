@@ -35,15 +35,64 @@ void printArray(struct array *parr)
 }
 
 void getArray(struct array *parr)
-{
-    
-}
+{  
+int i;  
+int numerox;
 
+
+scanf("%d",&numerox);
+parr->size=numerox;
+int array[numerox];
+parr->pdata = malloc(sizeof(int)*parr->size);
+for(i=0;i<numerox;i++)
+{
+scanf("%d", &array[i]);
+parr->pdata[i]=array[i];
+}
+//printf("size:%d\n",parr->size);
+
+//for(i=0;i<numerox;i++)
+//{
+//printf("%d\n",parr->pdata[i]);
+//}
+}
 void arrayCommon(struct array *arrIn1, struct array *arrIn2, struct array *arrOut)
 {
+    // recorrer los arreglos, inicializar arreglo 3 com muchos espacios, con numeros que el profe no le haga el predict,
+  
+    
+    int arrtemp[15]={-20,-20,-20,-20,-20,-20,20,-20,-20,-20,-20,-20,-20,-20,-20};
+    int counter = 0;
+    for (int i=0;i<arrIn1->size;i++)
+        {
+         
+          for(int j=0;j<arrIn2->size;j++)
+          {
+            if(arrIn1->pdata[i]==arrIn2->pdata[j])
+            {
+                arrtemp[i]=arrIn1->pdata[i];
+            }
+          }
+        } 
+        for(int f=0;f<sizeof(arrtemp);f++)
+        {
+            if(arrtemp[f]!=-20)
+            {
+                counter++;
+            }
+            
+        }
+        arrOut->pdata = malloc(sizeof(int)*counter);
+        for(int g=0;g<sizeof(arrtemp);g++)
+        {
+            if(arrtemp[g]!=-20)
+            {
+                arrOut->pdata[g]== arrtemp[g];
+            }
+           
+        }
     
 }
-
 void freeMemory(struct array *arr1, struct array *arr2, struct array *arr3)
 {
     free(arr1->pdata);
