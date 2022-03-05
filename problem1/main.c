@@ -82,12 +82,15 @@ void arrayCommon(struct array *arrIn1, struct array *arrIn2, struct array *arrOu
             }
             
         }
+        arrOut->size=counter;
         arrOut->pdata = malloc(sizeof(int)*counter);
-        for(int g=0;g<sizeof(arrtemp);g++)
+        for(int g=0,h=0;g<sizeof(arrtemp);g++)
         {
             if(arrtemp[g]!=-20)
             {
-                arrOut->pdata[g]== arrtemp[g];
+                arrOut->pdata[h]== arrtemp[g];
+                //printf("%d\n",arrOut->pdata[g]);
+                h++;
             }
            
         }
