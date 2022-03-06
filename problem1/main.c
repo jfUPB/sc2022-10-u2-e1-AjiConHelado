@@ -46,8 +46,8 @@ int array[numerox];
 parr->pdata = malloc(sizeof(int)*parr->size);
 for(i=0;i<numerox;i++)
 {
-scanf("%d", &array[i]);
-parr->pdata[i]=array[i];
+    scanf("%d", &array[i]);
+    parr->pdata[i]=array[i];
 }
 //printf("size:%d\n",parr->size);
 
@@ -60,40 +60,57 @@ void arrayCommon(struct array *arrIn1, struct array *arrIn2, struct array *arrOu
 {
     // recorrer los arreglos, inicializar arreglo 3 com muchos espacios, con numeros que el profe no le haga el predict,
   
-    
-    int arrtemp[15]={-20,-20,-20,-20,-20,-20,20,-20,-20,-20,-20,-20,-20,-20,-20};
+    int arrtemp2[15];
+    int arrtemp[15]={-20,-20,-20,-20,-20,-20,-20,-20,-20,-20,-20,-20,-20,-20,-20};
     int counter = 0;
     for (int i=0;i<arrIn1->size;i++)
         {
-         
           for(int j=0;j<arrIn2->size;j++)
           {
             if(arrIn1->pdata[i]==arrIn2->pdata[j])
             {
-                arrtemp[i]=arrIn1->pdata[i];
+                int bool =0;
+             for(int y =0;y< arrIn1->size;y++) 
+             {                                                           //comprobar si el dato repetido no esta en otro hueco del arreglo
+                if(arrtemp[y]== arrIn1->pdata[i]) 
+                {
+                    y=arrIn1->size;
+
+                    bool =1;   //poner datos repetidos en el arreglo temporal 
+                }
+                
+             }
+             if(bool ==0)
+             {
+                 arrtemp[i]=*(arrIn1->pdata+i);
+             }
             }
           }
-        } 
-        for(int f=0;f<sizeof(arrtemp);f++)
+        }
+       
+       
+        for(int f=0;f<15;f++)
         {
             if(arrtemp[f]!=-20)
             {
-                counter++;
-            }
-            
+                  arrtemp2[counter]=arrtemp[f];
+                counter++;            //contar espacios de datos repetidos en arreglo temporal
+            }    
         }
         arrOut->size=counter;
-        arrOut->pdata = malloc(sizeof(int)*counter);
-        for(int g=0,h=0;g<sizeof(arrtemp);g++)
+        arrOut->pdata = malloc(sizeof(int)*arrOut->size);
+        for(int g=0,h=0;g<arrOut->size;g++)
         {
-            if(arrtemp[g]!=-20)
-            {
-                arrOut->pdata[h]== arrtemp[g];
+            //if(arrtemp[g]!=-20)                          //armar el arreglo final
+            //{
+                *(arrOut->pdata+h)= arrtemp2[g];
                 //printf("%d\n",arrOut->pdata[g]);
                 h++;
-            }
-           
+                
+            //}  
         }
+
+
     
 }
 void freeMemory(struct array *arr1, struct array *arr2, struct array *arr3)
